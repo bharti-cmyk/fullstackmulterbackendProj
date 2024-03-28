@@ -24,7 +24,7 @@ const upload = multer({
     storage: imgconfig,
     fileFilter:isImage
 })
-router.post('/register', upload.single('photo'),async (req, res) => {
+router.post('/api/register', upload.single('photo'),async (req, res) => {
     const filename = req.file.filename;
     const fname = req.body.name;
 
@@ -47,7 +47,7 @@ router.post('/register', upload.single('photo'),async (req, res) => {
     }
 });
 
-router.get("/getdata", async(req,res) => {
+router.get("/api/getdata", async(req,res) => {
     try{
         const getUser = await users.find();
         res.status(200).json({status:'200', getUser});
@@ -57,7 +57,7 @@ router.get("/getdata", async(req,res) => {
     }
 })
 
-router.delete("/:id", async(req,res) => {
+router.delete("/api/:id", async(req,res) => {
     try{
         const {id} = req.params;
         const deleteUser = await users.findByIdAndDelete({_id:id});
